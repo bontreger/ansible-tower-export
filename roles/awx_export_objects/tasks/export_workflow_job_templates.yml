@@ -10,7 +10,7 @@
   delegate_to: localhost
   no_log: "{{ no_log_var }}"
 
-- name: Write Data to File
+- name: "Write {{ awx_export_objects_object }} Data to File"
   ansible.builtin.copy:
     dest: "{{ awx_export_objects_export_path }}/{{ awx_export_objects_object }}.json"
     content: "{{ awx_export_objects_export_data.assets |to_json }}"
