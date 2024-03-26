@@ -1,2 +1,4 @@
 [awx]
 <<Tower Hostname>>
+[aap_controller]
+<<Controller Hostname>>
