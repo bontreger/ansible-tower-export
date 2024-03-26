@@ -1,0 +1,7 @@
+---
+- name: Process Credential Secrets
+  include_tasks: credential_secrets.yml
+
+- name: Process Notofication Template Secrets
+  include_tasks: notification_secrets.yml
+

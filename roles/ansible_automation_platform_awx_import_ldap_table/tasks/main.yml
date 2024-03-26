@@ -1,0 +1,24 @@
+---
+# tasks file for ansible_automation_platform_awx_import_ldap_table
+- name: Query Users from Ansible Automation Platform
+  community.postgresql.postgresql_query:
+    db: "{{ ansible_automation_platform_awx_import_aap_database_name }}"
+    login_user: "{{ ansible_automation_platform_awx_import_aap_database_user }}"
+    login_password: "{{ ansible_automation_platform_awx_import_aap_database_password }}"
+    query: "select id,username from auth_user;"
+  register: __aap_user_table
+
+- name: Create User Mapping Table 
+  set_fact:
+    ansible_automation_platform_awx_import_user_id_table: "{{ ansible_automation_platform_awx_import_user_id_table | default({}) | combine( { item.id : item.username } ) }}"
+  loop: "{{ __aap_user_table.query_result }}"
+
+- name: Read LDAP UserDN Table
+  include_vars:
+    file: "{{ ansible_automation_platform_awx_import_assets_path }}/ldap_table.json"
+    name: user_ldap_table
+
+- include_tasks: usertable.yml
+  loop: "{{ ansible_automation_platform_awx_import_user_id_table | dict2items }}"
+  loop_control:
+    loop_var: ansible_automation_platform_awx_import_user_id

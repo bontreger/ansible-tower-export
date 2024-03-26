@@ -1,0 +1,13 @@
+---
+# Ansible Automation Platform Database Name
+# ansible_automation_platform_awx_import_aap_database_name:
+
+# Ansible Automation Platform Database Username
+# ansible_automation_platform_awx_import_aap_database_user
+
+# Ansible Automation Platform Database Password
+# ansible_automation_platform_awx_import_aap_database_password
+
+# Path where the exported object files are stored
+# awx_export_export_path:
+

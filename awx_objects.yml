@@ -1,0 +1,7 @@
+---
+- name: AWX Object Collector
+  hosts: awx
+  gather_facts: false
+  become: false
+  roles:
+    - awx_export_objects

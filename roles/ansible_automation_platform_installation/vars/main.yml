@@ -1,0 +1,36 @@
+---
+# vars file for ansible_automation_platform_installation
+ansible_automation_platform_installation_collections:
+  - name: ansible-controller
+    filename: "{{ ansible_controller_filename |default(omit) }}"
+
+ansible_automation_platform_installation_inventory:
+  all_vars:
+    pg_host: "{{ ansible_automation_platform_installation_database_host }}"
+    pg_port: '"{{ ansible_automation_platform_installation_database_port |default(5432) }}"'
+    automationhub_pg_host: "{{ ansible_automation_platform_installation_database_host }}"
+    automationhub_pg_port: '"{{ ansible_automation_platform_installation_database_port |default(5432) }}"'
+    pg_database: "{{ ansible_automation_platform_installation_database_name }}"
+    pg_username: "{{ ansible_automation_platform_installation_database_username |default('awx') }}"
+    pg_password: "{{ ansible_automation_platform_installation_database_password }}"
+    registry_url: "{{ ansible_automation_platform_installation_automationhub_host }}"
+    registry_username: "{{ ansible_automation_platform_installation_automationhub_username |default('admin') }}"
+    registry_password: "{{ ansible_automation_platform_installation_automationhub_password }}"
+    automationhub_pg_database: "{{ ansible_automation_platform_installation_automationhub_database_name }}"
+    automationhub_pg_username: "{{ ansible_automation_platform_installation_automationhub_database_username }}"
+    automationhub_pg_password: "{{ ansible_automation_platform_installation_automationhub_database_password }}"
+    automationhub_admin_password: "{{ ansible_automation_platform_installation_automationhub_admin_password }}"
+    admin_password: "{{ ansible_automation_platform_installation_admin_password }}"
+  ssl_general:
+    custom_ca_cert: "{{ ansible_automation_platform_installation_ssl_ca_cert |default(omit) }}"
+  ssl_automationhub:
+    automationhub_ssl_cert: "{{ ansible_automation_platform_installation_automationhub_ssl_cert |default(omit) }}"
+    automationhub_ssl_key: "{{ ansible_automation_platform_installation_automationhub_ssl_key |default(omit) }}"
+  ssl_controller:
+    web_server_ssl_cert: "{{ ansible_automation_platform_installation_controller_ssl_cert |default(omit) }}"
+    web_server_ssl_key: "{{ ansible_automation_platform_installation_controller_ssl_key |default(omit) }}"
+  ssl_postgresql:
+    postgres_use_ssl: "{{ ansible_automation_platform_installation_postgres_ssl_enabled |default(omit) }}"
+    postgres_ssl_cert: "{{ ansible_automation_platform_installation_postgres_ssl_cert |default(omit) }}"
+    postgres_ssl_key: "{{ ansible_automation_platform_installation_postgres_ssl_key |default(omit) }}"
+  become: "{{ ansible_automation_platform_installation_as_user |default(false) }}"

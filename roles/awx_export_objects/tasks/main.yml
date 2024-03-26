@@ -1,0 +1,6 @@
+---
+# tasks file for awx_export_objects
+- include_tasks: "export_{{ awx_export_objects_object }}.yml"
+  loop: "{{ awx_export_objects_object_list }}"
+  loop_control:
+    loop_var: awx_export_objects_object

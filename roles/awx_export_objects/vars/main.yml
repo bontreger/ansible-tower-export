@@ -1,0 +1,6 @@
+---
+# vars file for awx_export_objects
+awx_export_objects_user: "{{ awx_export_user }}"
+awx_export_objects_password: "{{ awx_export_password }}"
+awx_export_objects_export_path: "{{ awx_export_export_path }}"
+

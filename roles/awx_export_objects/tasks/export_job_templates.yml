@@ -1,0 +1,17 @@
+---
+- name: Export Objects
+  awx.awx.tower_export:
+    tower_host: "{{ inventory_hostname }}"
+    tower_password: "{{ awx_export_objects_password }}"
+    tower_username: "{{ awx_export_objects_user }}"
+    job_templates: all
+  register: awx_export_objects_export_data
+  no_log: true
+
+- name: Write Data to File
+  ansible.builtin.copy:
+    dest: "{{ awx_export_objects_export_path }}/{{ awx_export_objects_object }}.json"
+    content: "{{ awx_export_objects_export_data.assets |to_json }}"
+  delegate_to: localhost
+  no_log: true
+...

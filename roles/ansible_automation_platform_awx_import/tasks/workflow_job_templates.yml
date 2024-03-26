@@ -1,0 +1,28 @@
+---
+- name: Import {{ ansible_automation_platform_awx_import_object | capitalize }} Debug Mode
+  block:
+  - name: Create Empty Error List
+    set_fact:
+      __ansible_automation_platform_awx_import_workflow_job_template_errors: []
+
+  - name: Read Assets form Export
+    set_fact:
+      __ansible_automation_platform_awx_import_workflow_job_template_asset: "{{ lookup('file', '{{ __ansible_automation_platform_awx_import_assets_path }}/workflow_job_templates.json') |regex_replace('{{','__ANSIBLE_VARIABLE_BRACKETS_OPEN__') }}"
+
+  - name: Import {{ ansible_automation_platform_awx_import_object | capitalize }} Asset Tasks
+    include_tasks: import_asset.yml
+    loop: "{{ __ansible_automation_platform_awx_import_workflow_job_template_asset.workflow_job_templates }}"
+    loop_control:
+      loop_var: __ansible_automation_platform_awx_import_object_asset
+ 
+  when: ansible_automation_platform_awx_import_debug is defined
+
+- name: Import Workflow Job Templates
+  ansible.controller.import:
+    assets:                         "{{ lookup('file', '{{ __ansible_automation_platform_awx_import_assets_path }}/workflow_job_templates.json') }}"
+    controller_username:            "{{ controller_username }}"
+    controller_password:            "{{ controller_password }}"
+    controller_host:                "{{ inventory_hostname }}"
+    validate_certs: false
+  when: ansible_automation_platform_awx_import_debug is not defined
+...

@@ -1,0 +1,14 @@
+---
+- name: Import {{ ansible_automation_platform_awx_import_object }} Assets
+  ansible.controller.import:
+    assets:                         "{ '{{ ansible_automation_platform_awx_import_object }}': [ {{ __ansible_automation_platform_awx_import_object_asset |to_json |from_json |regex_replace('__ANSIBLE_VARIABLE_BRACKETS_OPEN__','{{') }} ] }"
+    controller_username:            "{{ controller_username }}"
+    controller_password:            "{{ controller_password }}"
+    controller_host:                "{{ inventory_hostname }}"
+    validate_certs: false
+  register: __ansible_automation_platform_awx_import_asset_result
+  ignore_errors: true
+
+- include_tasks: error_handler.yml
+  when: __ansible_automation_platform_awx_import_asset_result.failed == true
+...

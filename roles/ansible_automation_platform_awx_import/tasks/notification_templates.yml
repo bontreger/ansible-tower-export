@@ -1,0 +1,41 @@
+---
+- name: Notification  Assets
+  block:
+  - name: Create Temp Workspace
+    ansible.builtin.tempfile:
+      suffix: temp_aap_import
+      state: directory
+    register: awx_import_secrets_temp_folder
+    delegate_to: localhost
+
+  - name: Write Key File
+    ansible.builtin.lineinfile:
+      path: "{{ awx_import_secrets_temp_folder.path }}/key"
+      line: "{{ awx_export_secrets_vault_pass }}"
+      create: true
+      state: present
+    delegate_to: localhost
+    no_log: true
+
+
+  - name: Decrypt Credentials Asset
+    ansible.builtin.command: "ansible-vault decrypt {{ __ansible_automation_platform_awx_import_assets_path }}//notification_templates.json --output {{ awx_import_secrets_temp_folder.path }}//notification_templates.json --vault-password-file {{ awx_import_secrets_temp_folder.path }}/key"
+    delegate_to: localhost
+    no_log: true
+
+  - name: Import Notification Template Assets
+    ansible.controller.import:
+      assets:                         "{{ lookup('file', '{{ awx_import_secrets_temp_folder.path }}/notification_templates.json') }}"
+      controller_username:            "{{ controller_username }}"
+      controller_password:            "{{ controller_password }}"
+      controller_host:                "{{ inventory_hostname }}"
+      validate_certs: false
+    #delegate_to: localhost
+
+  always:
+  - name: Remove Temporary Working Directory
+    file:
+      path: "{{ awx_import_secrets_temp_folder.path }}"
+      state: absent
+    delegate_to: localhost
+...

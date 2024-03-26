@@ -1,0 +1,14 @@
+---
+- name: AWX Object Collector
+  hosts: aap_controller
+  gather_facts: false
+  become: false
+  roles:
+    - ansible_automation_platform_awx_import
+
+- name: AWX LDAP Table
+  hosts: aap_database
+  gather_facts: false
+  become: false
+  roles:
+    - ansible_automation_platform_awx_import_ldap_table

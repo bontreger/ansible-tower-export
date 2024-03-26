@@ -1,0 +1,40 @@
+---
+- name: Store Error Message
+  set_fact:
+    ansible_automation_platform_awx_import_error:
+      type: "{{ ansible_automation_platform_awx_import_object }}"
+      name: "{{ __ansible_automation_platform_awx_import_object_asset.name |to_json |from_json }}"
+      error: "{{ __ansible_automation_platform_awx_import_asset_result.msg }}"
+  when: __ansible_automation_platform_awx_import_object_asset.name is defined
+
+- name: Store Error Message User
+  set_fact:
+    ansible_automation_platform_awx_import_error:
+      type: "{{ ansible_automation_platform_awx_import_object }}"
+      name: "{{ __ansible_automation_platform_awx_import_object_asset.username |to_json |from_json }}"
+      error: "{{ __ansible_automation_platform_awx_import_asset_result.msg }}"
+  when: __ansible_automation_platform_awx_import_object_asset.username is defined
+
+- name: Store Error Message
+  set_fact:
+    ansible_automation_platform_awx_import_error:
+      type: "{{ ansible_automation_platform_awx_import_object }}"
+      error: "{{ __ansible_automation_platform_awx_import_asset_result.msg }}"
+  when: ( __ansible_automation_platform_awx_import_object_asset.name is not defined ) and ( __ansible_automation_platform_awx_import_object_asset.username is not defined )
+
+- name: Add Error Message to Error List
+  set_fact:
+    ansible_automation_platform_awx_import_errors: "{{ ansible_automation_platform_awx_import_errors }} + [ {{ ansible_automation_platform_awx_import_error }} ]"
+
+- name: Fail If Error Is Not In Ignoreable Errors List
+  fail: 
+    msg:
+      - "Unknown Error Occured:"
+      - "Object:"
+      - "  type: {{ ansible_automation_platform_awx_import_object }}"
+      - "  name: {{ __ansible_automation_platform_awx_import_object_asset.name |to_json |from_json }}"
+      - "  error: {{ __ansible_automation_platform_awx_import_asset_result.msg }}"
+  when: ( item.error not in ansible_automation_platform_awx_import_ignoreable_errors ) and
+        ( ansible_automation_platform_awx_import_ignore_all_errors == false )
+  loop: "{{ ansible_automation_platform_awx_import_errors }}"
+...

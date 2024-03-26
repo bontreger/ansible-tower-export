@@ -1,0 +1,28 @@
+---
+- name: Import {{ ansible_automation_platform_awx_import_object | capitalize }} Debug Mode
+  block:
+  - name: Create Empty Error List
+    set_fact:
+      __ansible_automation_platform_awx_import_user_errors: []
+
+  - name: Read Assets form Export
+    set_fact:
+      __ansible_automation_platform_awx_import_user_asset: "{{ lookup('file', '{{ __ansible_automation_platform_awx_import_assets_path }}/users.json') }}"
+
+  - name: Import {{ ansible_automation_platform_awx_import_object | capitalize }} Asset Tasks
+    include_tasks: import_asset.yml
+    loop: "{{ __ansible_automation_platform_awx_import_user_asset.users }}"
+    loop_control:
+      loop_var: __ansible_automation_platform_awx_import_object_asset
+ 
+  when: ansible_automation_platform_awx_import_debug is defined
+
+- name: Import {{ ansible_automation_platform_awx_import_object | capitalize }} Asset
+  ansible.controller.import:
+    assets:                         "{{ lookup('file', '{{ __ansible_automation_platform_awx_import_assets_path }}/users.json') }}"
+    controller_username:            "{{ controller_username }}"
+    controller_password:            "{{ controller_password }}"
+    controller_host:                "{{ inventory_hostname }}"
+    validate_certs: false
+  when: ansible_automation_platform_awx_import_debug is not defined
+...

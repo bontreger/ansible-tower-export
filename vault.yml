@@ -1,0 +1,21 @@
+# Username that interacts with Ansible Tower API
+vault_awx_export_user: 
+vault_awx_export_password: 
+
+# Path on the local machine to save the exported files to
+vault_awx_export_export_path: 
+
+# What server to put the exported tiles on (and user on that server that ansible can use)
+vault_awx_export_file_host: 
+vault_awx_export_file_user: 
+  
+# AWX database connection details (can usually be found in the installation inventory file)
+vault_awx_export_secrets_database_name: 
+vault_awx_export_secrets_database_user: 
+vault_awx_export_secrets_database_password: 
+# The tower encryption secret, usually found at /etc/tower/SECRET_KEY on the tower database server
+vault_awx_export_secrets_tower_secret:
+
+# password to use for encrypting the vault files that contain the exported credentials
+vault_awx_export_vault_pass: 
+

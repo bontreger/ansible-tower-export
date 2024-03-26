@@ -1,0 +1,58 @@
+---
+# defaults file for ansible_automation_platform_installation
+
+# Path to the Ansible Automation Platform Setup Bundle
+ansible_automation_platform_installation_setup_bundle: "/path/to/ansible-collection/ansible-automation-platform-setup-bundle-2.1.0-1.tar.gz"
+
+# Ansible Automation Platform Controller Admin Password:
+ansible_automation_platform_installation_admin_password:
+
+# Run Ansible Automation Platform Installation as User:
+#ansible_automation_platform_installation_as_user: true
+
+# Ansible Automation Platform Firewall managed by installer
+# Possible values are: [none, auto, firewalld]
+#ansible_automation_platform_installation_firewall_management: none
+
+# List of Ansible Automation Platform Controller nodes:
+ansible_automation_platform_installation_controller_hosts:
+  - ctlnode1.example.com
+  - ctlnode2.example.com
+  - ctlnode3.example.com
+
+#Ansible Automation Platform Controller SSL Settings:
+# ansible_automation_platform_installation_ssl_ca_cert: 
+# ansible_automation_platform_installation_controller_ssl_cert: 
+# ansible_automation_platform_installation_controller_ssl_key: 
+
+# Ansible Automation Platform Database Hostname:
+ansible_automation_platform_installation_database_host: aapdatabase.example.com
+# Ansible Automation Platform Database Port:
+ansible_automation_platform_installation_database_port: "5432"
+# Ansible Automation Platform Database Credentials:
+ansible_automation_platform_installation_database_name: awx
+ansible_automation_platform_installation_database_username: awx
+ansible_automation_platform_installation_database_password:
+# Ansible Automation Platform Database SSL Settings:
+# ansible_automation_platform_installation_postgres_ssl_enabled: 
+# ansible_automation_platform_installation_postgres_ssl_cert: 
+# ansible_automation_platform_installation_postgres_ssl_key: 
+
+# Private Automation Hub Hostname:
+ansible_automation_platform_installation_automationhub_host: aaphub.example.com
+# Private Automation Hub Credentials:
+ansible_automation_platform_installation_automationhub_admin_password: 
+# This can be used to connect to the private AutomationHub if it already exists and the user is already created.
+#Use the same password as for ansible_automation_platform_installation_automationhub_admin_password on new installations.
+ansible_automation_platform_installation_automationhub_username: admin
+ansible_automation_platform_installation_automationhub_password: 
+# Private Automation Hub Database Name:
+ansible_automation_platform_installation_automationhub_database_name: automationhub
+# Private Automation Hub Database Credentials:
+ansible_automation_platform_installation_automationhub_database_username: automationhubuser
+ansible_automation_platform_installation_automationhub_database_password: 
+# Private Automation Hub Database SSL Settings:
+#ansible_automation_platform_installation_automationhub_ssl_cert: 
+#ansible_automation_platform_installation_automationhub_ssl_key: 
+
+

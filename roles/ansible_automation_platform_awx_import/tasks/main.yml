@@ -1,0 +1,24 @@
+---
+# tasks file for ansible_automation_platform_awx_import
+- block:
+  - name: Create Empty Error List
+    set_fact:
+      ansible_automation_platform_awx_import_errors: []
+    
+  - include_tasks: "{{ ansible_automation_platform_awx_import_object }}.yml"
+    loop: "{{ ansible_automation_platform_awx_import_object_list }}"
+    loop_control:
+      loop_var: ansible_automation_platform_awx_import_object
+
+  always:
+
+  - name: Show Collected Error Messages
+    debug:
+      msg: "{{ ansible_automation_platform_awx_import_errors }}"
+    when: ansible_automation_platform_awx_import_errors != []
+
+  - name: Write Collected Error Messages To File
+    ansible.builtin.copy:
+      dest: "{{ __ansible_automation_platform_awx_import_assets_path }}/import_error.log"
+      content: "{{ ansible_automation_platform_awx_import_errors }}"
+    delegate_to: localhost
