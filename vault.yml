@@ -19,3 +19,5 @@ vault_awx_export_secrets_tower_secret:
 # password to use for encrypting the vault files that contain the exported credentials
 vault_awx_export_vault_pass: 
 
+# Set all no-log vars for easy troubleshooting (true/false)
+no_log_var: 

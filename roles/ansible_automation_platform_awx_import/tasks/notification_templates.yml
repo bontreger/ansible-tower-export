@@ -15,13 +15,13 @@
       create: true
       state: present
     delegate_to: localhost
-    no_log: true
+    no_log: "{{ no_log_var }}"
 
 
   - name: Decrypt Credentials Asset
     ansible.builtin.command: "ansible-vault decrypt {{ __ansible_automation_platform_awx_import_assets_path }}//notification_templates.json --output {{ awx_import_secrets_temp_folder.path }}//notification_templates.json --vault-password-file {{ awx_import_secrets_temp_folder.path }}/key"
     delegate_to: localhost
-    no_log: true
+    no_log: "{{ no_log_var }}"
 
   - name: Import Notification Template Assets
     ansible.controller.import:

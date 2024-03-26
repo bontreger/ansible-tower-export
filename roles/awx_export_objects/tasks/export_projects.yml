@@ -7,7 +7,7 @@
     validate_certs: false
     projects: all
   register: awx_export_objects_export_data
-  no_log: true
+  no_log: "{{ no_log_var }}"
 
 - name: Write Data to File
   ansible.builtin.copy:
@@ -15,5 +15,5 @@
     content: "{{ awx_export_objects_export_data.assets |to_json }}"
   delegate_to: "{{ awx_export_file_host }}"
   remote_user: "{{ awx_export_file_user }}"
-  no_log: true
+  no_log: "{{ no_log_var }}"
 ...
