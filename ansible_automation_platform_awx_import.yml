@@ -1,7 +1,0 @@
----
-- name: AWX Object Collector
-  hosts: aap_controller
-  gather_facts: false
-  become: false
-  roles:
-    - ansible_automation_platform_awx_import

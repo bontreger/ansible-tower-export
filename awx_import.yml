@@ -1,0 +1,46 @@
+---
+- name: Playbook to configure AAP controller post-installation
+  hosts: localhost
+  vars_files:
+    - "vault.yml"
+  connection: local
+  tasks:
+    - name: Create Organizations
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.organizations
+
+    - name: Create Teams
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.teams
+
+    - name: Create users
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.users
+
+    - name: Create Credential Types
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.credential_types
+        
+    - name: Create Credentials
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.credentials
+
+    - name: Create Projects
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.projects
+
+    - name: Create inventories
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.inventories
+    
+    - name: Create inventory sources
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.inventory_sources
+
+    - name: Create Job Templates
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.job_templates
+
+    - name: Create Teams
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.teams

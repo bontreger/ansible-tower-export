@@ -26,3 +26,9 @@ vault_awx_export_vault_pass:
 
 # Set all no-log vars for easy troubleshooting (true/false)
 no_log_var: 
+
+
+## Import connection vars
+vault_controller_hostname:
+vault_controller_username:
+vault_controller_password:
