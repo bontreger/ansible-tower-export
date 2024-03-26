@@ -13,6 +13,11 @@ vault_awx_export_file_user:
 vault_awx_export_secrets_database_name: 
 vault_awx_export_secrets_database_user: 
 vault_awx_export_secrets_database_password: 
+
+# AWX Database remote connection details
+vault_awx_export_secrets_remote_db_host:
+vault_awx_export_secrets_remote_db_port:
+
 # The tower encryption secret, usually found at /etc/tower/SECRET_KEY on the tower database server
 vault_awx_export_secrets_tower_secret:
 
