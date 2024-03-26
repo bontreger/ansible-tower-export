@@ -1,9 +1,10 @@
 ---
 - name: Export Objects
-  awx.awx.tower_export:
+  ansible.controller.export:
     tower_host: "{{ inventory_hostname }}"
     tower_password: "{{ awx_export_objects_password }}"
     tower_username: "{{ awx_export_objects_user }}"
+    validate_certs: false
     notification_templates: all
   register: awx_export_objects_export_data
   no_log: true
@@ -12,6 +13,7 @@
   ansible.builtin.copy:
     dest: "{{ awx_export_objects_export_path }}/{{ awx_export_objects_object }}.json"
     content: "{{ awx_export_objects_export_data.assets |to_nice_json }}"
-  delegate_to: localhost
+  delegate_to: "{{ awx_export_file_host }}"
+  remote_user: "{{ awx_export_file_user }}"
   no_log: true
 ...

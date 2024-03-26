@@ -7,7 +7,7 @@ awx_export_password: "{{ vault_awx_export_password }}"
 
 # Path where the exported objects will get stored:
 awx_export_export_path: "{{ vault_awx_export_export_path }}"
-awx_export_file_server: "{{ vault_awx_export_file_server }}"
+awx_export_file_host: "{{ vault_awx_export_file_host }}"
 awx_export_file_user: "{{ vault_awx_export_file_user }}"
 
 # AWX Database Name

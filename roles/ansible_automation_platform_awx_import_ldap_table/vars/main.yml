@@ -1,2 +1,0 @@
----
-ansible_automation_platform_awx_import_assets_path: "{{ awx_export_export_path }}"

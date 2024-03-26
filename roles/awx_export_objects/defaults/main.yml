@@ -1,13 +1,16 @@
 ---
 # 
 # Username accessing the AWX API. This User requires superuser privileges.
-# awx_export_user
+awx_export_user: "{{ vault_awx_export_user }}"
 
 # Password of the user accessing the AWX API.
-# awx_export_password
+awx_export_password: "{{ vault_awx_export_password }}"
 
 # Path where the exported objects will get stored:
-# awx_export_export_path
+awx_export_export_path: "{{ vault_awx_export_export_path }}"
+awx_export_file_host: "{{ vault_awx_export_file_host }}"
+awx_export_file_user: "{{ vault_awx_export_file_user }}"
+
 
 # Objects which will get exported from AWX
 awx_export_objects_object_list:

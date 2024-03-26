@@ -4,5 +4,4 @@ awx_export_secrets_user: "{{ awx_export_user }}"
 awx_export_secrets_password: "{{ awx_export_password }}"
 awx_export_secrets_vault_pass: "{{ awx_export_vault_pass }}"
 awx_export_secrets_export_path: "{{ awx_export_export_path }}"
-awx_export_secrets_file_host: "{{ awx_export_file_host }}"
-awx_export_secrets_file_user: "{{ awx_export_file_user }}"
+

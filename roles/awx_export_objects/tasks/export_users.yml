@@ -1,28 +1,10 @@
 ---
-- name: Run AWX Database Query for User LDAP DN Table
-  community.docker.docker_container_exec:
-    container: "{{ awx_export_secrets_postgres_container }}"
-    command: "psql -t -A -U {{ awx_export_secrets_database_user }} -d {{ awx_export_secrets_database_name }} -c \"select a.username, (select ldap_dn from main_profile as b where b.user_id = a.id ) as data from auth_user a;\""
-  register: awx_export_objects_database_query
-
-- name: Create User LDAP DN Table
-  set_fact:
-    awx_export_objects_ldap_table: "{{ awx_export_objects_ldap_table | default({}) | combine( { item.split('|')[0] : item.split('|')[1] } ) }}"
-  loop: "{{ awx_export_objects_database_query.stdout_lines }}"
-  when: item.split('|')[1] != ''
-
-- name: Write LDAP Table to File
-  ansible.builtin.copy:
-    dest: "{{ awx_export_objects_export_path }}/ldap_table.json"
-    content: "{{ awx_export_objects_ldap_table |to_json }}"
-  delegate_to: localhost
-  no_log: true
-
 - name: Export Objects
-  awx.awx.tower_export:
+  ansible.controller.export:
     tower_host: "{{ inventory_hostname }}"
     tower_password: "{{ awx_export_objects_password }}"
     tower_username: "{{ awx_export_objects_user }}"
+    validate_certs: false
     users: all
   register: awx_export_objects_export_data
   no_log: true
@@ -31,6 +13,7 @@
   ansible.builtin.copy:
     dest: "{{ awx_export_objects_export_path }}/{{ awx_export_objects_object }}.json"
     content: "{{ awx_export_objects_export_data.assets |to_json }}"
-  delegate_to: localhost
+  delegate_to: "{{ awx_export_file_host }}"
+  remote_user: "{{ awx_export_file_user }}"
   no_log: true
 ...

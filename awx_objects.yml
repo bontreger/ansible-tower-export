@@ -3,5 +3,7 @@
   hosts: awx
   gather_facts: false
   become: false
+  vars_files:
+    - "vault.yml"
   roles:
     - awx_export_objects
