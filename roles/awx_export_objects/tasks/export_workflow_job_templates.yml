@@ -1,6 +1,6 @@
 ---
 - name: Export Objects
-  ansible.builtin.export:
+  ansible.controller.export:
     tower_host: "{{ inventory_hostname }}"
     tower_password: "{{ awx_export_objects_password }}"
     tower_username: "{{ awx_export_objects_user }}"
