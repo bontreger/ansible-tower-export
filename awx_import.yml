@@ -4,6 +4,11 @@
   vars_files:
     - "vault.yml"
   connection: local
+  pre_tasks:
+    - name: Include vars from controller_configs directory
+      ansible.builtin.include_vars:
+        dir: ./vars
+        extensions: ["yml", "json"]
   tasks:
     - name: Create Organizations
       ansible.builtin.include_role:
