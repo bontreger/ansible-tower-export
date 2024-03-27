@@ -30,6 +30,10 @@
       ansible.builtin.include_role:
         name: infra.controller_configuration.credentials
 
+    - name: Create Notification Templates
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.notification_templates
+        
     - name: Create Projects
       ansible.builtin.include_role:
         name: infra.controller_configuration.projects
