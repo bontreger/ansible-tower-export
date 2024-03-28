@@ -9,6 +9,8 @@ Run this command:
 ## Importing
 Throw all those json files into tower-credential-export/vars/ and run the awx_import.yml playbook. This does require the infra.controller_configuration collection, so build an EE with it or install it and run it locally.
 
+SANITIZE your input files manually (i.e. delete the admin user if you don't want to overwrite it and break your AAP install, for instance)
+
 
 ## Disclaimer
 

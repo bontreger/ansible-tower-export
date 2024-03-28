@@ -4,6 +4,11 @@
   vars_files:
     - "vault.yml"
   connection: local
+  pre_tasks:
+    - name: Include vars from controller_configs directory
+      ansible.builtin.include_vars:
+        dir: ./vars
+        extensions: ["yml", "json"]
   tasks:
     - name: Create Organizations
       ansible.builtin.include_role:
@@ -25,6 +30,10 @@
       ansible.builtin.include_role:
         name: infra.controller_configuration.credentials
 
+    - name: Create Notification Templates
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.notification_templates
+        
     - name: Create Projects
       ansible.builtin.include_role:
         name: infra.controller_configuration.projects
@@ -33,6 +42,14 @@
       ansible.builtin.include_role:
         name: infra.controller_configuration.inventories
     
+    - name: Create Hosts
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.hosts
+
+    - name: Create Hosts
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.groups
+   
     - name: Create inventory sources
       ansible.builtin.include_role:
         name: infra.controller_configuration.inventory_sources
@@ -40,7 +57,7 @@
     - name: Create Job Templates
       ansible.builtin.include_role:
         name: infra.controller_configuration.job_templates
-
-    - name: Create Teams
+    
+    - name: Create Schedules
       ansible.builtin.include_role:
-        name: infra.controller_configuration.teams
+        name: infra.controller_configuration.schedules
