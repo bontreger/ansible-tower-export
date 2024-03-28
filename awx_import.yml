@@ -57,10 +57,6 @@
     - name: Create Job Templates
       ansible.builtin.include_role:
         name: infra.controller_configuration.job_templates
-
-    - name: Create Teams
-      ansible.builtin.include_role:
-        name: infra.controller_configuration.teams
     
     - name: Create Schedules
       ansible.builtin.include_role:
