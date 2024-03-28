@@ -42,6 +42,14 @@
       ansible.builtin.include_role:
         name: infra.controller_configuration.inventories
     
+    - name: Create Hosts
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.hosts
+
+    - name: Create Hosts
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.groups
+   
     - name: Create inventory sources
       ansible.builtin.include_role:
         name: infra.controller_configuration.inventory_sources
@@ -53,3 +61,7 @@
     - name: Create Teams
       ansible.builtin.include_role:
         name: infra.controller_configuration.teams
+    
+    - name: Create Schedules
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.schedules
