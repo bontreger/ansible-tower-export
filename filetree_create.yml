@@ -9,7 +9,7 @@
     controller_password: "{{ vault_controller_password | default(lookup('env', 'CONTROLLER_PASSWORD')) }}"
     controller_hostname: "{{ vault_controller_hostname | default(lookup('env', 'CONTROLLER_HOST')) }}"
     controller_validate_certs: "{{ vault_controller_validate_certs | default(lookup('env', 'CONTROLLER_VERIFY_SSL')) }}"
-
+# I can't explain why, but exporting certain objects with the filetree command (schedules were the ones that got me), you have to use a token
   pre_tasks:
     - name: "Setup authentication (block)"
       block:
@@ -37,6 +37,13 @@
       ansible.builtin.include_role:
         name: infra.controller_configuration.filetree_create
       vars:
-        valid_tags: job_templates
-        input_tag: ['job_templates']
+        valid_tags: all
+        input_tag: ['all']
         flatten_output: true
+
+    - name: Write out filetree_create files to local filesystem
+      ansible.builtin.copy:
+        src: "/tmp/filetree_output/"
+        dest: "{{ awx_export_path }}/"
+      delegate_to: "{{ awx_export_file_host }}"
+      remote_user: "{{ awx_export_file_user }}"

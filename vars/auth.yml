@@ -4,3 +4,4 @@ controller_username: "{{ vault_controller_username }}"
 controller_password: "{{ vault_controller_password }}"
 controller_validate_certs: false
 controller_request_timeout: 60
+awx_export_path: "{{ vault_awx_export_path }}"
