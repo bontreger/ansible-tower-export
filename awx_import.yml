@@ -8,7 +8,7 @@
     - name: Include vars from controller_configs directory
       ansible.builtin.include_vars:
         dir: ./vars
-        extensions: ["yml", "json"]
+        extensions: ["yml", "yaml", "json"]
   tasks:
     - name: Create Organizations
       ansible.builtin.include_role:
