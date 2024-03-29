@@ -3,6 +3,7 @@
   hosts: localhost
   vars_files:
     - "vault.yml"
+    - "./vars/auth.yml"
   connection: local
   vars:
     controller_username: "{{ vault_controller_username | default(lookup('env', 'CONTROLLER_USERNAME')) }}"
