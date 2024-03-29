@@ -14,7 +14,9 @@ vault_awx_export_secrets_database_name:
 vault_awx_export_secrets_database_user: 
 vault_awx_export_secrets_database_password: 
 
-# AWX Database remote connection details
+# Is your tower instance an all-in-one or a clustered install?
+vault_awx_export_secrets_all_in_one: false
+# AWX Database remote connection details (only needed if the database is external to the tower/awx host)
 vault_awx_export_secrets_remote_db_host:
 vault_awx_export_secrets_remote_db_port:
 

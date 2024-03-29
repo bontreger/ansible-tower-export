@@ -18,6 +18,7 @@ awx_export_secrets_database_user: "{{ vault_awx_export_secrets_database_user }}"
 
 # awx database password
 awx_export_secrets_database_password: "{{ vault_awx_export_secrets_database_password }}"
+awx_export_secrets_all_in_one: "{{ vault_awx_export_secrets_all_in_one }}"
 # tower remote database vars
 awx_export_secrets_remote_db_host: "{{ vault_awx_export_secrets_remote_db_host }}"
 awx_export_secrets_remote_db_port: "{{ vault_awx_export_secrets_remote_db_port }}"
