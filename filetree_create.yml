@@ -41,10 +41,3 @@
         valid_tags: all
         input_tag: ['all']
         flatten_output: true
-
-    - name: Write out filetree_create files to local filesystem
-      ansible.builtin.copy:
-        src: "/tmp/filetree_output/"
-        dest: "{{ awx_export_path }}/"
-      delegate_to: "{{ awx_export_file_host }}"
-      remote_user: "{{ awx_export_file_user }}"
